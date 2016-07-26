@@ -1,0 +1,31 @@
+
+fpath=(~/.zsh/functions $fpath)
+autoload -U compinit ; compinit -u
+
+#
+# Go
+#
+export GOPATH=$HOME/Go
+export PATH=${GOPATH}/bin:${PATH}
+
+#
+# Visual Studio
+#
+code () {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code"
+    else
+        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+        open -a "Visual Studio Code" --args "$F"
+    fi
+}
+
+#
+# anyenv
+#
+if [ -d $HOME/.anyenv ] ; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
+
